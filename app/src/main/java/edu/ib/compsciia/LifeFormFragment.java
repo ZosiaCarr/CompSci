@@ -1,4 +1,4 @@
-package com.example.compsciia;
+package edu.ib.compsciia;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.compsciia.placeholder.PlaceholderContent;
+import edu.ib.compsciia.placeholder.PlaceholderContent;
 
 /**
  * A fragment representing a list of Items.

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.compsciia.FirstFragment"
+        android:name="edu.ib.compsciia.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_main">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.compsciia.SecondFragment"
+        android:name="edu.ib.compsciia.CalendarFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_calendar">
 

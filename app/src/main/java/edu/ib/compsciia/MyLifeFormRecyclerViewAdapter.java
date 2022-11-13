@@ -1,4 +1,4 @@
-package com.example.compsciia;
+package edu.ib.compsciia;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.compsciia.placeholder.PlaceholderContent.PlaceholderItem;
-import com.example.compsciia.databinding.LifeFormItemBinding;
+import edu.ib.compsciia.placeholder.PlaceholderContent.PlaceholderItem;
+import edu.ib.compsciia.databinding.LifeFormItemBinding;
 
 import java.util.List;
 

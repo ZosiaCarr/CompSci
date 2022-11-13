@@ -1,4 +1,4 @@
-package com.example.compsciia;
+package edu.ib.compsciia;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 
-import com.example.compsciia.databinding.FragmentSchedulesBinding;
+import edu.ib.compsciia.databinding.FragmentSchedulesBinding;
 
 public class FirstFragment extends Fragment {
 

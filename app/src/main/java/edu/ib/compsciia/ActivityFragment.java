@@ -1,4 +1,4 @@
-package com.example.compsciia;
+package edu.ib.compsciia;
 
 import androidx.lifecycle.ViewModelProvider;
 
