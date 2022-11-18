@@ -8,13 +8,8 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="edu.ib.compsciia.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_main">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
+        android:label="@string/fragment_add_life_form"
+        tools:layout="@layout/fragment_add_life_form"/>
     <fragment
         android:id="@+id/SecondFragment"
         android:name="edu.ib.compsciia.CalendarFragment"
@@ -25,14 +20,18 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
         <action
-            android:id="@+id/action_SecondFragment_to_activityFragment2"
+            android:id="@+id/btnAddSchedule_to_activityFragment"
             app:destination="@id/activityFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_schedules"
         android:name="edu.ib.compsciia.fragment_schedules"
         android:label="fragment_schedules"
-        tools:layout="@layout/fragment_schedules" />
+        tools:layout="@layout/fragment_schedules" >
+        <action
+            android:id="@+id/action_fragment_schedules_to_activityFragment"
+            app:destination="@id/activityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/activityFragment"
         android:name="edu.ib.compsciia.ActivityFragment"

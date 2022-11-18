@@ -15,10 +15,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAddLifeForm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="80dp"
         android:text="Add Life Form"
         android:textSize="16sp"
@@ -26,11 +26,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnAddSchedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="25dp"
         android:text="Add Schedule"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

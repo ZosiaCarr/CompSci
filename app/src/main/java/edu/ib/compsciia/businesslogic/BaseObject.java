@@ -1,6 +1,6 @@
 package edu.ib.compsciia.businesslogic;
 
-public class BaseObject {
+public class BaseObject implements java.io.Serializable   {
     private LifeFormManager lifeFormManager;
     public BaseObject(LifeFormManager lfm)
     {
