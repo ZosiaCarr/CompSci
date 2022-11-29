@@ -3,9 +3,8 @@ package edu.ib.compsciia.businesslogic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Schedule  extends BaseObject{
-    public Schedule(LifeFormManager lfm) {
-        super(lfm);
+public class Schedule {
+    public Schedule() {
         activities = new ArrayList<Activity>();
         daysOfTheWeek = new ArrayList<daysOfWeek>();
     }

@@ -10,7 +10,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class LifeFormManager  implements java.io.Serializable {
+    private static LifeFormManager lifeFormManagerInstance = null;
+    private static LifeFormManager getManager()
+    {
+        return lifeFormManagerInstance;
+    }
     public LifeFormManager()
     {
         lifeForms = new ArrayList<LifeForm>();
@@ -43,10 +49,6 @@ public class LifeFormManager  implements java.io.Serializable {
     {
         this.schedules.remove(s);
     }
-    public BaseObject createBaseObject()
-    {
-        return new BaseObject(this);
-    }
     public void save(Context context)
     {
         try {
@@ -72,17 +74,15 @@ public class LifeFormManager  implements java.io.Serializable {
             is.close();
 
             if(readObject != null && readObject instanceof LifeFormManager) {
-                LifeFormManager lfm =  (LifeFormManager) readObject;
-
-                return lfm;
+                lifeFormManagerInstance =  (LifeFormManager) readObject;
             }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        return new LifeFormManager();
+        lifeFormManagerInstance = new LifeFormManager();
+        return lifeFormManagerInstance;
     }
 }
 

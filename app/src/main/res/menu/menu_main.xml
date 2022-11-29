@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="edu.ib.compsciia.MainActivity">
     <item
-        android:id="@+id/action_calendar"
         android:orderInCategory="100"
+        android:id="@+id/action_calendar"
         android:title="@string/action_calendar"
-        app:showAsAction="never"
-        android:onClick=""/>
+        app:showAsAction="never" />
     <item
         android:orderInCategory="101"
         android:title="@string/life_forms" />
