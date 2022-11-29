@@ -57,10 +57,26 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.fragment_schedules) {
-
+        if (id == R.id.action_calendar) {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main); // replace "nav_host_fragment" with the id of your navHostFragment in activity layout
+            navController.navigate(R.id.calendarFragment);
+            return true;
         }
-
+        if (id == R.id.action_calendar) {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main); // replace "nav_host_fragment" with the id of your navHostFragment in activity layout
+            navController.navigate(R.id.calendarFragment);
+            return true;
+        }
+        if (id == R.id.action_lifeForms) {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main); // replace "nav_host_fragment" with the id of your navHostFragment in activity layout
+            navController.navigate(R.id.lifeFormFragment);
+            return true;
+        }
+        if (id == R.id.action_schedules) {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main); // replace "nav_host_fragment" with the id of your navHostFragment in activity layout
+            navController.navigate(R.id.fragment_schedules);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

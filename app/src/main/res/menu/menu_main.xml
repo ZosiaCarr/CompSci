@@ -9,8 +9,10 @@
         app:showAsAction="never" />
     <item
         android:orderInCategory="101"
+        android:id="@+id/action_lifeForms"
         android:title="@string/life_forms" />
     <item
         android:orderInCategory="102"
+        android:id="@+id/action_schedules"
         android:title="@string/schedules" />
 </menu>
