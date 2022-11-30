@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +24,20 @@ public class CalendarFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+        View view =  inflater.inflate(R.layout.fragment_calendar, container, false);
+        Button btnLifeForm = (Button) view.findViewById(R.id.btnAddLifeForm);
+        Button btnSchedule = (Button) view.findViewById(R.id.btnAddSchedule);
+        btnLifeForm.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onAddLifeFormClick(view);
+            }
+        });
+        btnSchedule.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onAddScheduleClick(view);
+            }
+        });
+        return view;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -35,7 +49,6 @@ public class CalendarFragment extends Fragment {
     public void onAddScheduleClick(View view) {
         Navigation.findNavController(view).navigate(R.id.addScheduleFragment);
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

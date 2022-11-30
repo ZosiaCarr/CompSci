@@ -13,7 +13,7 @@ import java.util.List;
 
 public class LifeFormManager  implements java.io.Serializable {
     private static LifeFormManager lifeFormManagerInstance = null;
-    private static LifeFormManager getManager()
+    public static LifeFormManager getManager()
     {
         return lifeFormManagerInstance;
     }
