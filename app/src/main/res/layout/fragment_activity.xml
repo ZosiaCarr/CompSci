@@ -6,17 +6,17 @@
     tools:context=".ActivityFragment">
 
     <CheckBox
-        android:id="@+id/checkBox10"
+        android:id="@+id/checkBoxSun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="5dp"
         android:text="Sun"
-        app:layout_constraintStart_toEndOf="@+id/checkBox9"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
+        app:layout_constraintStart_toEndOf="@+id/checkBoxSat"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxWen" />
 
     <CheckBox
-        android:id="@+id/checkBox7"
+        android:id="@+id/checkBoxMon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -26,13 +26,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <CheckBox
-        android:id="@+id/checkBox6"
+        android:id="@+id/checkBoxWen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         android:text="W"
-        app:layout_constraintStart_toEndOf="@+id/checkBox3"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxTus"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <TextView
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/txtActivityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/txtDiscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -74,7 +74,7 @@
         android:text="Discription"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtActivityName" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -96,7 +96,7 @@
         android:textColor="#0E0101"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDiscription" />
 
     <Button
         android:id="@+id/btnSaveActivity"
@@ -134,7 +134,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAddTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -155,43 +155,43 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/checkBoxThurs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:text="Th"
         app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxMon" />
 
     <CheckBox
-        android:id="@+id/checkBox8"
+        android:id="@+id/checkBoxFri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="5dp"
         android:text="F"
-        app:layout_constraintStart_toEndOf="@+id/checkBox2"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+        app:layout_constraintStart_toEndOf="@+id/checkBoxThurs"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTus" />
 
     <CheckBox
-        android:id="@+id/checkBox9"
+        android:id="@+id/checkBoxSat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="5dp"
         android:text="Sat"
-        app:layout_constraintStart_toEndOf="@+id/checkBox8"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
+        app:layout_constraintStart_toEndOf="@+id/checkBoxFri"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxWen" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/checkBoxTus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         android:text="T"
-        app:layout_constraintStart_toEndOf="@+id/checkBox7"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxMon"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
