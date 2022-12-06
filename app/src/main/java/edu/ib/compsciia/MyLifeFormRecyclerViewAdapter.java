@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import edu.ib.compsciia.businesslogic.LifeForm;
 import edu.ib.compsciia.placeholder.PlaceholderContent.PlaceholderItem;
 import edu.ib.compsciia.databinding.LifeFormItemBinding;
 
@@ -18,9 +19,9 @@ import java.util.List;
  */
 public class MyLifeFormRecyclerViewAdapter extends RecyclerView.Adapter<MyLifeFormRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<LifeForm> mValues;
 
-    public MyLifeFormRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public MyLifeFormRecyclerViewAdapter(List<LifeForm> items) {
         mValues = items;
     }
 
@@ -34,8 +35,7 @@ public class MyLifeFormRecyclerViewAdapter extends RecyclerView.Adapter<MyLifeFo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mContentView.setText(mValues.get(position).getName());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MyLifeFormRecyclerViewAdapter extends RecyclerView.Adapter<MyLifeFo
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public LifeForm mItem;
 
         public ViewHolder(LifeFormItemBinding binding) {
             super(binding.getRoot());

@@ -25,8 +25,9 @@ public class LifeFormManager  implements java.io.Serializable {
     private static final String FILENAME = "LifeForms.data";
     private List<LifeForm> lifeForms;
     private List<Schedule> schedules;
-
-    public List<LifeForm> getLifeForm () {
+    private static Context _context;
+    private static void setContext(Context c) {_context = c;}
+    public List<LifeForm> getLifeForms () {
         return lifeForms;
     }
     public List<Schedule> getSchedules () {
@@ -36,6 +37,7 @@ public class LifeFormManager  implements java.io.Serializable {
     public void addLifeForm(LifeForm lf)
     {
         this.lifeForms.add(lf);
+        this.save(_context);
     }
     public void removeLifeForm(LifeForm lf)
     {
@@ -55,7 +57,7 @@ public class LifeFormManager  implements java.io.Serializable {
             try {
                 FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(this);
+                oos.writeObject(lifeFormManagerInstance);
                 oos.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -78,10 +80,12 @@ public class LifeFormManager  implements java.io.Serializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            lifeFormManagerInstance = new LifeFormManager();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            lifeFormManagerInstance = new LifeFormManager();
         }
-        lifeFormManagerInstance = new LifeFormManager();
+        lifeFormManagerInstance.setContext(context);
         return lifeFormManagerInstance;
     }
 }

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.ib.compsciia.businesslogic.LifeFormManager;
 import edu.ib.compsciia.placeholder.PlaceholderContent;
 
 /**
@@ -70,7 +71,7 @@ public class LifeFormFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyLifeFormRecyclerViewAdapter(PlaceholderContent.ITEMS));
+            recyclerView.setAdapter(new MyLifeFormRecyclerViewAdapter(LifeFormManager.getManager().getLifeForms()));
         }
         return view;
     }

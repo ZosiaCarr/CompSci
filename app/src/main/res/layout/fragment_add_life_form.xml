@@ -32,6 +32,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
+    <EditText
+        android:id="@+id/txtDescripton"
+        android:layout_width="233dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="textLongMessage"
+        android:text="Description"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSpecies" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="378dp"
@@ -52,10 +65,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:text="Save"
         android:onClick="onSave"
+        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthDate" />
 
     <TextView
         android:id="@+id/textView8"
@@ -68,20 +82,6 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLFName" />
-
-    <EditText
-        android:id="@+id/dateBirthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="56dp"
-        android:ems="10"
-        android:inputType="date"
-        android:text="Birthday"
-        android:textColor="#0B0B0B"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSpecies" />
 
 
     <RadioGroup
@@ -106,10 +106,17 @@
             android:id="@+id/radioBtnPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="Plant"
             app:layout_constraintStart_toEndOf="@+id/radioBtnPet"
             app:layout_constraintTop_toBottomOf="@+id/txtLFName" />
     </RadioGroup>
+
+    <CalendarView
+        android:id="@+id/birthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescripton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
