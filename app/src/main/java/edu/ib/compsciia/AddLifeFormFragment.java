@@ -14,9 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import edu.ib.compsciia.businesslogic.AppViewModel;
 import edu.ib.compsciia.businesslogic.LifeForm;
 import edu.ib.compsciia.businesslogic.LifeFormManager;
 import edu.ib.compsciia.businesslogic.Pet;
@@ -26,11 +29,23 @@ public class AddLifeFormFragment extends Fragment {
     private static final String default_name = "Name";
     private static final String default_species = "Species";
     private static final String default_description = "Species";
-
+    private AppViewModel viewModel;
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private LifeForm editItem = null;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
+
+        LiveData<LifeForm> editForm = viewModel.getSelectedItem();
+        editItem = editForm.getValue();;
         View view =  inflater.inflate(R.layout.fragment_add_life_form, container, false);
+        if(editItem != null) {
+            SetValuesFromEditForm(view);
+            viewModel.selectLifeform(null);
+        }
+
         Button btnLifeForm = (Button) view.findViewById(R.id.btnSaveLifeForm);
         Button rbPet = (Button) view.findViewById(R.id.radioBtnPet);
         CalendarView calendarView = (CalendarView) view.findViewById(R.id.birthDate);
@@ -76,7 +91,7 @@ public class AddLifeFormFragment extends Fragment {
         birthDay.setVisibility(View.GONE);
     }
     public void onSave(View view) {
-        //ge the fields from the form
+        //Gets the fields from the form
         RadioButton rbPlant = (RadioButton) view.findViewById(R.id.radioBtnPlant);
         RadioButton rbPet = (RadioButton) view.findViewById(R.id.radioBtnPet);
         AppCompatEditText nameField = view.findViewById(R.id.txtLFName);
@@ -84,7 +99,7 @@ public class AddLifeFormFragment extends Fragment {
         AppCompatEditText descriptionField = view.findViewById(R.id.txtDescripton);
         CalendarView calendarView = (CalendarView) view.findViewById(R.id.birthDate);
 
-        //get the needed values
+        //Gets the needed values
         String nameValue = nameField.getText().toString();
         String speciesValue = speciesField.getText().toString();
         String descriptionValue = descriptionField.getText().toString();
@@ -104,6 +119,7 @@ public class AddLifeFormFragment extends Fragment {
             hasError = true;
         }
 
+        //Gives an error if the user does not input a description of their life form
         if(descriptionValue.length() == 0 || descriptionValue.equals(default_description))
         {
             descriptionField.setError("Required");
@@ -113,22 +129,62 @@ public class AddLifeFormFragment extends Fragment {
         //Saves life form
         if(!hasError)
         {
-            LifeForm lf = null;
-            //IF PET
+            if(editItem == null) {
+                //If plant
+                if (rbPlant.isChecked()) {
+                    editItem = new Plant();
+                }
+                //If pet
+                else {
 
-            if(rbPlant.isChecked())
+                    editItem = new Pet();
+                    editItem.setBirthDay(new Date(calendarView.getDate()));
+                }
+                LifeFormManager.getManager().addLifeForm(editItem);
+            }
+            else
             {
-                 lf = new Plant();
+                if(editItem instanceof Pet)
+                {
+                    editItem.setBirthDay(new Date(calendarView.getDate()));
+                }
             }
-            else {
-                lf = new Pet();
-                lf.setBirthDay(new Date(calendarView.getDate()));
-            }
-            lf.setName(nameValue);
-            lf.setDescription(descriptionValue);
-            lf.setSpecies(speciesValue);
-            LifeFormManager.getManager().addLifeForm(lf);
+            //Saves the name of the life form
+            editItem.setName(nameValue);
+            //Saves the description of the life form
+            editItem.setDescription(descriptionValue);
+            //Saves the species of the life form
+            editItem.setSpecies(speciesValue);
+            //Adds the life form to the life form manager
+            LifeFormManager.getManager().persist();
             Navigation.findNavController(view).navigate(R.id.lifeFormFragment);
         }
     }
+    public void SetValuesFromEditForm(View view) {
+        //Gets the fields from the form
+        RadioButton rbPlant = (RadioButton) view.findViewById(R.id.radioBtnPlant);
+        RadioButton rbPet = (RadioButton) view.findViewById(R.id.radioBtnPet);
+        AppCompatEditText nameField = view.findViewById(R.id.txtLFName);
+        AppCompatEditText speciesField = view.findViewById(R.id.txtSpecies);
+        AppCompatEditText descriptionField = view.findViewById(R.id.txtDescripton);
+        CalendarView calendarView = (CalendarView) view.findViewById(R.id.birthDate);
+
+        //Gets the needed values
+        nameField.setText(editItem.getName());
+        speciesField.setText(editItem.getSpecies());
+        descriptionField.setText(editItem.getDescription());
+
+        if(editItem instanceof Pet)
+        {
+            rbPet.setChecked(true);
+            onPetClick(view);
+            calendarView.setDate(editItem.getBirthDay().getTime());
+        }
+        else
+        {
+            rbPlant.setChecked(true);
+            onPlantClick(view);
+        }
+    }
+
 }

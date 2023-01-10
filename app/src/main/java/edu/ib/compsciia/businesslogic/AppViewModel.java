@@ -1,13 +1,10 @@
-package edu.ib.compsciia;
+package edu.ib.compsciia.businesslogic;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import edu.ib.compsciia.businesslogic.LifeForm;
-import edu.ib.compsciia.businesslogic.Schedule;
-
-public class ActivityViewModel extends ViewModel {
+public class AppViewModel extends ViewModel {
     private final MutableLiveData<LifeForm> selectedLifeForm = new MutableLiveData<LifeForm>();
     private final MutableLiveData<Schedule> selectedSchedule = new MutableLiveData<Schedule>();
     public void selectLifeform(LifeForm item) {
@@ -24,4 +21,5 @@ public class ActivityViewModel extends ViewModel {
     public LiveData<Schedule> getSelectedSchedule() {
         return selectedSchedule;
     }
+
 }

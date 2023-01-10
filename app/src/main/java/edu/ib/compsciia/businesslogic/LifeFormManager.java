@@ -34,9 +34,14 @@ public class LifeFormManager  implements java.io.Serializable {
         return schedules;
     }
 
+
     public void addLifeForm(LifeForm lf)
     {
         this.lifeForms.add(lf);
+        this.persist();
+    }
+    public void persist()
+    {
         this.save(_context);
     }
     public void removeLifeForm(LifeForm lf)

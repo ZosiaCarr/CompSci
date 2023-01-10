@@ -3,10 +3,14 @@ package edu.ib.compsciia;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import edu.ib.compsciia.businesslogic.LifeForm;
+import edu.ib.compsciia.businesslogic.LifeFormManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +58,7 @@ public class fragment_schedules extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

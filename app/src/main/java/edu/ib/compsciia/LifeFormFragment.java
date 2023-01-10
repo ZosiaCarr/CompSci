@@ -6,6 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.ib.compsciia.businesslogic.AppViewModel;
+import edu.ib.compsciia.businesslogic.LifeForm;
 import edu.ib.compsciia.businesslogic.LifeFormManager;
 import edu.ib.compsciia.placeholder.PlaceholderContent;
 
@@ -30,7 +35,7 @@ public class LifeFormFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-
+    private AppViewModel viewModel;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -51,10 +56,20 @@ public class LifeFormFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        viewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+    }
+    public void onEdit(View v, LifeForm lf)
+    {
+        viewModel.selectLifeform(lf);
+        Navigation.findNavController(v).navigate(R.id.AddLifeFormFragment);
+    }
+    public void onDelete(View v, LifeForm lf)
+    {
+        LifeFormManager.getManager().removeLifeForm(lf);
+        LifeFormManager.getManager().persist();
     }
 
     @Override
@@ -71,7 +86,7 @@ public class LifeFormFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyLifeFormRecyclerViewAdapter(LifeFormManager.getManager().getLifeForms()));
+            recyclerView.setAdapter(new MyLifeFormRecyclerViewAdapter(LifeFormManager.getManager().getLifeForms(),this));
         }
         return view;
     }
