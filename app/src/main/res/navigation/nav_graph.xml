@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
+    android:label="Activity"
     app:startDestination="@id/calendarFragment">
     <fragment
         android:id="@+id/AddLifeFormFragment"
@@ -13,21 +14,49 @@
         android:id="@+id/calendarFragment"
         android:name="edu.ib.compsciia.CalendarFragment"
         android:label="fragment_schedules"
-        tools:layout="@layout/fragment_schedules" />
-    <action android:id="@+id/action_global_calendarFragment" app:destination="@id/calendarFragment" />
-    <action android:id="@+id/action_global_AddLifeFormFragment" app:destination="@id/AddLifeFormFragment" />
+        tools:layout="@layout/fragment_calendar" />
+    <action
+        android:id="@+id/action_global_calendarFragment"
+        app:destination="@id/calendarFragment" />
+    <action
+        android:id="@+id/action_global_AddLifeFormFragment"
+        app:destination="@id/AddLifeFormFragment" />
     <fragment
         android:id="@+id/addScheduleFragment"
         android:name="edu.ib.compsciia.AddScheduleFragment"
-        android:label="fragment_add_schedule"
-        tools:layout="@layout/fragment_add_schedule" />
+        android:label="Schedule"
+        tools:layout="@layout/fragment_add_schedule">
+        <action
+            android:id="@+id/action_addScheduleFragment_to_addActivityFragment"
+            app:destination="@id/addActivityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/lifeFormFragment"
         android:name="edu.ib.compsciia.LifeFormFragment"
         android:label="life_form_item_list"
         tools:layout="@layout/life_form_item_list" />
+
     <fragment
-        android:id="@+id/fragment_schedules"
-        android:name="edu.ib.compsciia.fragment_schedules"
-        android:label="fragment_schedules" />
+        android:id="@+id/activityListFragment"
+        android:name="edu.ib.compsciia.ActivityListFragment"
+        android:label="fragment_activity_list"
+        tools:layout="@layout/fragment_activity_list" />
+    <fragment
+        android:id="@+id/addActivityFragment"
+        android:name="edu.ib.compsciia.AddActivityFragment"
+        android:label="fragment_add_activity"
+        tools:layout="@layout/fragment_add_activity" >
+        <action
+            android:id="@+id/action_addActivityFragment_pop"
+            app:popUpTo="@id/addActivityFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addActivityFragment_to_addScheduleFragment2"
+            app:destination="@id/addScheduleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="edu.ib.compsciia.ScheduleFragment"
+        android:label="schedule_item_list"
+        tools:layout="@layout/schedule_item_list" />
 </navigation>

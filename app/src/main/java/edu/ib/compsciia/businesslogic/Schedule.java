@@ -9,18 +9,27 @@ public class Schedule {
         daysOfTheWeek = new ArrayList<daysOfWeek>();
     }
 
-    private List<Activity> activities;
-   private List<daysOfWeek> daysOfTheWeek;
+    private final List<Activity> activities;
+    private String shortDescription;
+    private final List<daysOfWeek> daysOfTheWeek;
     private int alertTimeBefore;
     private int time;
+
+
 
 
     public List<Activity> getActivities () {
         return activities;
     }
- //   public List<daysOfWeak> getDaysOfTheWeek () {
-  //      return daysOfTheWeek;
-   // }
+    public boolean hasDayOfWeek (daysOfWeek d) {
+          return daysOfTheWeek.contains(d);
+    }
+    public void removeDayOfTheWeek (daysOfWeek d) {
+         daysOfTheWeek.remove(d);
+    }
+    public boolean addDayOfWeek (daysOfWeek d) {
+        return daysOfTheWeek.add(d);
+    }
 
 
     public int getTime() {
@@ -36,6 +45,13 @@ public class Schedule {
         this.alertTimeBefore = alertTimeBefore;
     }
 
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
 
     public void addActivity(Activity ac)
     {
@@ -45,7 +61,5 @@ public class Schedule {
     {
         this.activities.remove(ac);
     }
-
-
 
 }

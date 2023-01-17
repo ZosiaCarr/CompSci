@@ -8,37 +8,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import edu.ib.compsciia.businesslogic.Schedule;
+import edu.ib.compsciia.businesslogic.Activity;
 import edu.ib.compsciia.placeholder.PlaceholderContent.PlaceholderItem;
-import edu.ib.compsciia.databinding.ScheduleItemBinding;
+import edu.ib.compsciia.databinding.ActivityListItemBinding;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class MyScheduleRecyclerViewAdapter extends RecyclerView.Adapter<MyScheduleRecyclerViewAdapter.ViewHolder> {
+public class MyActivityListRecyclerViewAdapter extends RecyclerView.Adapter<MyActivityListRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Schedule> mValues;
-    private final ScheduleFragment fragment;
-    public MyScheduleRecyclerViewAdapter(List<Schedule> items, ScheduleFragment fragment) {
+    private final List<Activity> mValues;
+    private ActivityListFragment fragment;
+
+    public MyActivityListRecyclerViewAdapter(List<Activity> items, ActivityListFragment fragment) {
         mValues = items;
-        this.fragment = fragment;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(ScheduleItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new ViewHolder(ActivityListItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
 
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        //holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).getShortDescription());
+        holder.mContentView.setText(mValues.get(position).ToString());
+
     }
 
     @Override
@@ -47,15 +43,14 @@ public class MyScheduleRecyclerViewAdapter extends RecyclerView.Adapter<MySchedu
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
         public final TextView mContentView;
+        public Activity mItem;
         final public ImageView mDelete;
         final public ImageView mEdit;
-        public Schedule mItem;
 
-        public ViewHolder(ScheduleItemBinding binding) {
+
+        public ViewHolder(ActivityListItemBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
             mContentView = binding.content;
             mDelete = binding.delete;
             mEdit = binding.edit;

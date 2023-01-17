@@ -14,5 +14,6 @@
     <string name="schedules">Schedules</string>
     <string name="life_forms">Life Forms</string>
     <string name="Activity">fragment_activity</string>
+    <string name="description">Description</string>
 
 </resources>

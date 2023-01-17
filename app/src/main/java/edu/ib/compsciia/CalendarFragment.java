@@ -17,10 +17,6 @@ public class CalendarFragment extends Fragment {
 
     private ActivityViewModel mViewModel;
 
-    public static ActivityFragment newInstance() {
-        return new ActivityFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {

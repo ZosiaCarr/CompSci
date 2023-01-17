@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import edu.ib.compsciia.businesslogic.AppViewModel;
@@ -30,15 +28,14 @@ public class AddLifeFormFragment extends Fragment {
     private static final String default_species = "Species";
     private static final String default_description = "Species";
     private AppViewModel viewModel;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private LifeForm editItem = null;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
 
-        LiveData<LifeForm> editForm = viewModel.getSelectedItem();
+        LiveData<LifeForm> editForm = viewModel.getSelectedLifeForm();
         editItem = editForm.getValue();;
         View view =  inflater.inflate(R.layout.fragment_add_life_form, container, false);
         if(editItem != null) {

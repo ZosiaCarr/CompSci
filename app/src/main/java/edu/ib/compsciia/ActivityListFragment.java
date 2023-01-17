@@ -14,64 +14,54 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.ib.compsciia.businesslogic.Activity;
 import edu.ib.compsciia.businesslogic.AppViewModel;
 import edu.ib.compsciia.businesslogic.LifeFormManager;
 import edu.ib.compsciia.businesslogic.Schedule;
 
-
 /**
  * A fragment representing a list of Items.
  */
-public class ScheduleFragment extends Fragment {
-
+public class ActivityListFragment extends Fragment { ;
 
     private AppViewModel viewModel;
+    private Schedule mySchedule;
 
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public ScheduleFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static ScheduleFragment newInstance(int columnCount) {
-        ScheduleFragment fragment = new ScheduleFragment();
-        return fragment;
+    public ActivityListFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.schedule_item_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_activity_list, container, false);
+
+        viewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
+
+        mySchedule = viewModel.getSelectedSchedule().getValue();
 
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-            recyclerView.setAdapter(new MyScheduleRecyclerViewAdapter(LifeFormManager.getManager().getSchedules(), this));
+            recyclerView.setAdapter(new MyActivityListRecyclerViewAdapter(mySchedule.getActivities(),this));
         }
         return view;
     }
 
-    public void onEdit(View v, Schedule s)
+    public void onEdit(View v, Activity a)
     {
-        viewModel.setSelectedSchedule(s);
-        Navigation.findNavController(v).navigate(R.id.addScheduleFragment);
+        viewModel.setSelectedActivity(a);
+        Navigation.findNavController(v).navigate(R.id.action_addScheduleFragment_to_addActivityFragment);
     }
-    public void onDelete(View v, Schedule s)
+    public void onDelete(View v, Activity a)
     {
-        LifeFormManager.getManager().removeSchedule(s);
+        mySchedule.removeActivity(a);
         LifeFormManager.getManager().persist();
     }
 
