@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,12 +25,20 @@ import edu.ib.compsciia.businesslogic.Pet;
 import edu.ib.compsciia.businesslogic.Plant;
 
 public class AddLifeFormFragment extends Fragment {
-    private static final String default_name = "Name";
-    private static final String default_species = "Species";
-    private static final String default_description = "Species";
     private AppViewModel viewModel;
 
     private LifeForm editItem = null;
+
+    CalendarView birthDay = null;
+    Button btnLifeForm = null;
+    RadioButton rbPet = null;
+    RadioButton rbPlant = null;
+    TextView txtBDay = null;
+
+    AppCompatEditText nameField = null;
+    AppCompatEditText speciesField = null;
+    AppCompatEditText descriptionField = null;
+    CalendarView calendarView = null;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -43,12 +52,18 @@ public class AddLifeFormFragment extends Fragment {
             viewModel.selectLifeform(null);
         }
 
-        Button btnLifeForm = (Button) view.findViewById(R.id.btnSaveLifeForm);
-        Button rbPet = (Button) view.findViewById(R.id.radioBtnPet);
-        CalendarView calendarView = (CalendarView) view.findViewById(R.id.birthDate);
-        Button rbPlant = (Button) view.findViewById(R.id.radioBtnPlant);
+        btnLifeForm = (Button) view.findViewById(R.id.btnSaveLifeForm);
+        rbPet = (RadioButton) view.findViewById(R.id.radioBtnPet);
+        rbPlant = (RadioButton) view.findViewById(R.id.radioBtnPlant);
+        birthDay = (CalendarView) view.findViewById(R.id.birthDate);
+        txtBDay = (TextView) view.findViewById(R.id.txtBirthday);
+        nameField = view.findViewById(R.id.txtLFName);
+        speciesField = view.findViewById(R.id.txtSpecies);
+        descriptionField = view.findViewById(R.id.txtDescripton);
 
-        calendarView.setDate(new java.util.Date().getTime());
+        birthDay.setDate(new java.util.Date().getTime());
+        birthDay.setVisibility(View.GONE);
+        txtBDay.setVisibility(View.GONE);
         //Wire up events
         btnLifeForm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -78,46 +93,41 @@ public class AddLifeFormFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+    //Makes pet b-day calender visible when user selects pet
     public void onPetClick(View view) {
-        CalendarView birthDay = (CalendarView) view.findViewById(R.id.birthDate);
         birthDay.setVisibility(View.VISIBLE);
+        txtBDay.setVisibility(View.VISIBLE);
 
     }
+    //Makes pet b-day calender invisible when user selects plant
     public void onPlantClick(View view) {
-        CalendarView birthDay = (CalendarView) view.findViewById(R.id.birthDate);
         birthDay.setVisibility(View.GONE);
+        txtBDay.setVisibility(View.GONE);
     }
     public void onSave(View view) {
-        //Gets the fields from the form
-        RadioButton rbPlant = (RadioButton) view.findViewById(R.id.radioBtnPlant);
-        RadioButton rbPet = (RadioButton) view.findViewById(R.id.radioBtnPet);
-        AppCompatEditText nameField = view.findViewById(R.id.txtLFName);
-        AppCompatEditText speciesField = view.findViewById(R.id.txtSpecies);
-        AppCompatEditText descriptionField = view.findViewById(R.id.txtDescripton);
-        CalendarView calendarView = (CalendarView) view.findViewById(R.id.birthDate);
 
-        //Gets the needed values
+        //Gets the needed values from user inputs
         String nameValue = nameField.getText().toString();
         String speciesValue = speciesField.getText().toString();
         String descriptionValue = descriptionField.getText().toString();
 
         //Gives an error if the user does not input the name of their life form
         boolean hasError = false;
-        if(nameValue.length() == 0 || nameValue.equals(default_name))
+        if(nameValue.length() == 0)
         {
             nameField.setError("Required");
             hasError = true;
         }
 
         //Gives an error if the user does not input the species of their life form
-        if(speciesValue.length() == 0 || speciesValue.equals(default_species))
+        if(speciesValue.length() == 0)
         {
             speciesField.setError("Required");
             hasError = true;
         }
 
         //Gives an error if the user does not input a description of their life form
-        if(descriptionValue.length() == 0 || descriptionValue.equals(default_description))
+        if(descriptionValue.length() == 0)
         {
             descriptionField.setError("Required");
             hasError = true;
@@ -158,13 +168,6 @@ public class AddLifeFormFragment extends Fragment {
         }
     }
     public void SetValuesFromEditForm(View view) {
-        //Gets the fields from the form
-        RadioButton rbPlant = (RadioButton) view.findViewById(R.id.radioBtnPlant);
-        RadioButton rbPet = (RadioButton) view.findViewById(R.id.radioBtnPet);
-        AppCompatEditText nameField = view.findViewById(R.id.txtLFName);
-        AppCompatEditText speciesField = view.findViewById(R.id.txtSpecies);
-        AppCompatEditText descriptionField = view.findViewById(R.id.txtDescripton);
-        CalendarView calendarView = (CalendarView) view.findViewById(R.id.birthDate);
 
         //Gets the needed values
         nameField.setText(editItem.getName());

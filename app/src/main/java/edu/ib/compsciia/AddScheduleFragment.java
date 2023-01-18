@@ -25,6 +25,19 @@ import edu.ib.compsciia.businesslogic.Schedule;
 public class AddScheduleFragment extends Fragment {
     private Schedule editItem;
     private AppViewModel viewModel;
+    //Gets the fields from the form
+    //Get Radio Buttons
+    CheckBox cbMonday = null;
+    CheckBox cbTuesday = null;
+    CheckBox cbWednesday = null;
+    CheckBox cbThursday = null;
+    CheckBox cbFriday = null;
+    CheckBox cbSaturday = null;
+    CheckBox cbSunday = null;
+    EditText txtTime = null;
+    EditText txtDescription = null;
+    TextView lblActivity = null;
+    TextView lblDays = null;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -47,6 +60,20 @@ public class AddScheduleFragment extends Fragment {
 
         Button btnSaveSchedule = (Button) view.findViewById(R.id.btnSaveSchedule);
         ImageButton btnAddActivity = (ImageButton) view.findViewById(R.id.btnAddActivity);
+        //Gets the fields from the form
+        //Get Radio Buttons
+        cbMonday = (CheckBox) view.findViewById(R.id.cbMonday);
+        cbTuesday = (CheckBox) view.findViewById(R.id.cbTuesday);
+         cbWednesday = (CheckBox) view.findViewById(R.id.cbWednesday);
+         cbThursday = (CheckBox) view.findViewById(R.id.cbThursday);
+         cbFriday = (CheckBox) view.findViewById(R.id.cbFriday);
+         cbSaturday = (CheckBox) view.findViewById(R.id.cbSaturday);
+         cbSunday = (CheckBox) view.findViewById(R.id.cbSunday);
+         txtTime = (EditText)view.findViewById(R.id.txtScheduleTime);
+         txtDescription = (EditText)view.findViewById(R.id.txtShortDescription);
+         lblActivity = (TextView)view.findViewById(R.id.lblAtivitiesText);
+         lblDays = (TextView) view.findViewById(R.id.lblDays);
+
         btnSaveSchedule.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onSave(view);
@@ -74,46 +101,36 @@ public class AddScheduleFragment extends Fragment {
         super.onDestroyView();
     }
     public void onSave(View view) {
-        //Gets the fields from the form
-        //Get Radio Buttons
-        CheckBox cbMonday = (CheckBox) view.findViewById(R.id.cbMonday);
-        CheckBox cbTuesday = (CheckBox) view.findViewById(R.id.cbTuesday);
-        CheckBox cbWednesday = (CheckBox) view.findViewById(R.id.cbWednesday);
-        CheckBox cbThursday = (CheckBox) view.findViewById(R.id.cbThursday);
-        CheckBox cbFriday = (CheckBox) view.findViewById(R.id.cbFriday);
-        CheckBox cbSaturday = (CheckBox) view.findViewById(R.id.cbSaturday);
-        CheckBox cbSunday = (CheckBox) view.findViewById(R.id.cbSunday);
-        EditText txtTime = (EditText)view.findViewById(R.id.txtScheduleTime);
-        EditText txtDescription = (EditText)view.findViewById(R.id.txtShortDescription);
-        TextView lblActivity = (TextView)view.findViewById(R.id.lblAtivitiesText);
-        TextView lblDays = (TextView) view.findViewById(R.id.lblDays);
+
 
         //Gets the needed values
         String DescriptionValue = txtDescription.getText().toString();
         String timeValue = txtTime.getText().toString();
 
-        //Gives an error if the user does not input the name of their life form
-        //Valadate all feilds have been filled in
+        //Valadates all feilds have been filled in
+        //Gives an error if the user does not input a description of the schedule
         boolean hasError = false;
         if (DescriptionValue.length() == 0) {
             txtDescription.setError("Required");
             hasError = true;
         }
 
-        //Gives an error if the user does not input the species of their life form
+        //Gives an error if the user does not input the time for the schedule
         if (timeValue.length() == 0) {
             txtTime.setError("Required");
             hasError = true;
         }
+        //Gives an error if the user does not add any activities
         if (editItem.getActivities().size() == 0) {
-            lblActivity.setError("You need at least one Activity");
+            lblActivity.setError("You need at least one activity");
             hasError = true;
         }
 
+        //Gives an error if the user does not select at least one day
         if (!cbMonday.isChecked() && !cbTuesday.isChecked() && !cbWednesday.isChecked() &&
                 !cbThursday.isChecked() && !cbFriday.isChecked() &&
                 !cbSaturday.isChecked() && !cbSunday.isChecked()) {
-            lblDays.setError("You must have one day selected");
+            lblDays.setError("You need at least one day");
             hasError = true;
         }
 
@@ -130,16 +147,6 @@ public class AddScheduleFragment extends Fragment {
 
     //For editing
     public void SetValuesFromEditForm(View view) {
-        //Gets the fields from the form
-        CheckBox cbMonday = (CheckBox) view.findViewById(R.id.cbMonday);
-        CheckBox cbTuesday = (CheckBox) view.findViewById(R.id.cbTuesday);
-        CheckBox cbWednesday = (CheckBox) view.findViewById(R.id.cbWednesday);
-        CheckBox cbThursday = (CheckBox) view.findViewById(R.id.cbThursday);
-        CheckBox cbFriday = (CheckBox) view.findViewById(R.id.cbFriday);
-        CheckBox cbSaturday = (CheckBox) view.findViewById(R.id.cbSaturday);
-        CheckBox cbSunday = (CheckBox) view.findViewById(R.id.cbSunday);
-        EditText time = (EditText)  view.findViewById((R.id.txtScheduleTime));
-
 
         //Gets the needed values
         EditText txtDescription = (EditText)view.findViewById(R.id.txtShortDescription);
