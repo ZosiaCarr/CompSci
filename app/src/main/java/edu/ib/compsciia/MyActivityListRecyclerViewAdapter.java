@@ -20,7 +20,8 @@ public class MyActivityListRecyclerViewAdapter extends RecyclerView.Adapter<MyAc
     private ActivityListFragment fragment;
 
     public MyActivityListRecyclerViewAdapter(List<Activity> items, ActivityListFragment fragment) {
-        mValues = items;
+        this.mValues = items;
+        this.fragment = fragment;
     }
 
     @Override

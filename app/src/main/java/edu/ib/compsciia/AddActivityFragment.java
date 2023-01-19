@@ -86,7 +86,7 @@ public class AddActivityFragment extends Fragment {
         editItem = cachedEditItem.getValue();
 
         if(editItem != null) {
-            SetValuesFromEditForm(view);
+            SetValuesFromEditForm();
             viewModel.selectLifeform(null);
         }
         else
@@ -148,12 +148,13 @@ public class AddActivityFragment extends Fragment {
             {
                 mySchedule.addActivity(editItem);
             }
+            viewModel.setSelectedActivity(null);
             Navigation.findNavController(view).navigate(R.id.addScheduleFragment);
         }
     }
 
     //For editing
-    public void SetValuesFromEditForm(View view) {
+    public void SetValuesFromEditForm() {
         txtDescription.setText(editItem.getDescription());
 
         for(checkboxAndValue cvb : lifeFormsCheckboxes)

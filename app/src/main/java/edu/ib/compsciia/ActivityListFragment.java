@@ -26,7 +26,7 @@ public class ActivityListFragment extends Fragment { ;
 
     private AppViewModel viewModel;
     private Schedule mySchedule;
-
+    private RecyclerView recyclerView;
     public ActivityListFragment() {
     }
 
@@ -47,7 +47,7 @@ public class ActivityListFragment extends Fragment { ;
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(new MyActivityListRecyclerViewAdapter(mySchedule.getActivities(),this));
         }
@@ -62,7 +62,9 @@ public class ActivityListFragment extends Fragment { ;
     public void onDelete(View v, Activity a)
     {
         mySchedule.removeActivity(a);
-        LifeFormManager.getManager().persist();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(new MyActivityListRecyclerViewAdapter(mySchedule.getActivities(),this));
+        //LifeFormManager.getManager().persist();
     }
 
 }

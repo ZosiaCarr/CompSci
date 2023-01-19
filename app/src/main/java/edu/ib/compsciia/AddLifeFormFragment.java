@@ -1,6 +1,9 @@
 package edu.ib.compsciia;
 
+import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,41 +32,31 @@ public class AddLifeFormFragment extends Fragment {
 
     private LifeForm editItem = null;
 
-    CalendarView birthDay = null;
     Button btnLifeForm = null;
     RadioButton rbPet = null;
     RadioButton rbPlant = null;
-    TextView txtBDay = null;
+    TextView txtBirthDay = null;
 
     AppCompatEditText nameField = null;
     AppCompatEditText speciesField = null;
     AppCompatEditText descriptionField = null;
-    CalendarView calendarView = null;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
 
-        LiveData<LifeForm> editForm = viewModel.getSelectedLifeForm();
-        editItem = editForm.getValue();;
         View view =  inflater.inflate(R.layout.fragment_add_life_form, container, false);
-        if(editItem != null) {
-            SetValuesFromEditForm(view);
-            viewModel.selectLifeform(null);
-        }
-
+        //grab objects from the form
         btnLifeForm = (Button) view.findViewById(R.id.btnSaveLifeForm);
         rbPet = (RadioButton) view.findViewById(R.id.radioBtnPet);
         rbPlant = (RadioButton) view.findViewById(R.id.radioBtnPlant);
-        birthDay = (CalendarView) view.findViewById(R.id.birthDate);
-        txtBDay = (TextView) view.findViewById(R.id.txtBirthday);
+        txtBirthDay = view.findViewById(R.id.txtBirthDate);
         nameField = view.findViewById(R.id.txtLFName);
         speciesField = view.findViewById(R.id.txtSpecies);
-        descriptionField = view.findViewById(R.id.txtDescripton);
+        descriptionField = view.findViewById(R.id.txtDescription);
+        txtBirthDay.setVisibility(View.GONE);
 
-        birthDay.setDate(new java.util.Date().getTime());
-        birthDay.setVisibility(View.GONE);
-        txtBDay.setVisibility(View.GONE);
         //Wire up events
         btnLifeForm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -72,14 +65,22 @@ public class AddLifeFormFragment extends Fragment {
         });
         rbPet.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                onPetClick(view);
+                onPetClick();
             }
         });
         rbPlant.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                onPlantClick(view);
+                onPlantClick();
             }
         });
+
+        //Check to see if we are editing or saving a new one
+        LiveData<LifeForm> editForm = viewModel.getSelectedLifeForm();
+        editItem = editForm.getValue();;
+        if(editItem != null) {
+            SetValuesFromEditForm();
+            viewModel.selectLifeform(null);
+        }
 
         return view;
     }
@@ -94,15 +95,13 @@ public class AddLifeFormFragment extends Fragment {
         super.onDestroyView();
     }
     //Makes pet b-day calender visible when user selects pet
-    public void onPetClick(View view) {
-        birthDay.setVisibility(View.VISIBLE);
-        txtBDay.setVisibility(View.VISIBLE);
+    public void onPetClick() {
+        txtBirthDay.setVisibility(View.VISIBLE);
 
     }
     //Makes pet b-day calender invisible when user selects plant
-    public void onPlantClick(View view) {
-        birthDay.setVisibility(View.GONE);
-        txtBDay.setVisibility(View.GONE);
+    public void onPlantClick() {
+        txtBirthDay.setVisibility(View.GONE);
     }
     public void onSave(View view) {
 
@@ -145,7 +144,15 @@ public class AddLifeFormFragment extends Fragment {
                 else {
 
                     editItem = new Pet();
-                    editItem.setBirthDay(new Date(calendarView.getDate()));
+                    DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ENGLISH);
+                    try {
+                        editItem.setBirthDay(df.parse(txtBirthDay.getText().toString()));
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+
                 }
                 LifeFormManager.getManager().addLifeForm(editItem);
             }
@@ -153,7 +160,14 @@ public class AddLifeFormFragment extends Fragment {
             {
                 if(editItem instanceof Pet)
                 {
-                    editItem.setBirthDay(new Date(calendarView.getDate()));
+                    DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ENGLISH);
+                    try {
+                        editItem.setBirthDay(df.parse(txtBirthDay.getText().toString()));
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                 }
             }
             //Saves the name of the life form
@@ -167,7 +181,7 @@ public class AddLifeFormFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.lifeFormFragment);
         }
     }
-    public void SetValuesFromEditForm(View view) {
+    public void SetValuesFromEditForm() {
 
         //Gets the needed values
         nameField.setText(editItem.getName());
@@ -177,13 +191,22 @@ public class AddLifeFormFragment extends Fragment {
         if(editItem instanceof Pet)
         {
             rbPet.setChecked(true);
-            onPetClick(view);
-            calendarView.setDate(editItem.getBirthDay().getTime());
+            onPetClick();
+            DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ENGLISH);
+            try {
+                editItem.setBirthDay(df.parse(txtBirthDay.getText().toString()));
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            txtBirthDay.setText( DateFormat.getDateInstance(DateFormat.SHORT).format(editItem.getBirthDay()));
         }
         else
         {
             rbPlant.setChecked(true);
-            onPlantClick(view);
+            onPlantClick();
         }
     }
 

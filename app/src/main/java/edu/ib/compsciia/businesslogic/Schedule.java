@@ -13,7 +13,7 @@ public class Schedule {
     private String shortDescription;
     private final List<daysOfWeek> daysOfTheWeek;
     private int alertTimeBefore;
-    private int time;
+    private String time;
 
 
 
@@ -32,10 +32,10 @@ public class Schedule {
     }
 
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
     public int getAlertTimeBefore() {

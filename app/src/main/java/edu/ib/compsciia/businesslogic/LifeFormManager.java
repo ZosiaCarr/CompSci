@@ -50,7 +50,11 @@ public class LifeFormManager  implements java.io.Serializable {
     }
     public void addSchedule(Schedule s)
     {
-        this.schedules.add(s);
+        if(!this.schedules.contains(s))
+        {
+            this.schedules.add(s);
+        }
+
     }
     public void removeSchedule(Schedule s)
     {

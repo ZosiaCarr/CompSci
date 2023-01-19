@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lblDays" />
 
     <EditText
-        android:id="@+id/txtDescripton"
+        android:id="@+id/txtDescription"
         android:layout_width="233dp"
         android:layout_height="98dp"
         android:layout_marginStart="16dp"
@@ -55,11 +55,12 @@
         android:id="@+id/btnSaveLifeForm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:onClick="onSave"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthDate" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBirthDate" />
 
     <TextView
         android:id="@+id/lblDays"
@@ -103,26 +104,17 @@
             app:layout_constraintTop_toBottomOf="@+id/txtLFName" />
     </RadioGroup>
 
-    <CalendarView
-        android:id="@+id/birthDate"
+    <EditText
+        android:id="@+id/txtBirthDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Birthday"
+        android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBirthday" />
-
-    <TextView
-        android:id="@+id/txtBirthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="Birthdate:"
-        android:textColor="#0E0000"
-        android:textSize="20sp"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescripton" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
