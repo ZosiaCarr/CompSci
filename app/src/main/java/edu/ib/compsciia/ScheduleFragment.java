@@ -55,13 +55,20 @@ public class ScheduleFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-            recyclerView.setAdapter(new MyScheduleRecyclerViewAdapter(LifeFormManager.getManager().getSchedules(), this));
+            bindList(view);
         }
+
         return view;
+    }
+
+    private void bindList(View view)
+    {
+        Context context = view.getContext();
+        RecyclerView recyclerView = (RecyclerView) view;
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        recyclerView.setAdapter(new MyScheduleRecyclerViewAdapter(LifeFormManager.getManager().getSchedules(), this));
+
     }
 
     public void onEdit(View v, Schedule s)
@@ -69,10 +76,11 @@ public class ScheduleFragment extends Fragment {
         viewModel.setSelectedSchedule(s);
         Navigation.findNavController(v).navigate(R.id.addScheduleFragment);
     }
-    public void onDelete(View v, Schedule s)
+    public void onDelete(View v, Schedule s)    
     {
         LifeFormManager.getManager().removeSchedule(s);
         LifeFormManager.getManager().persist();
+        bindList(v);
     }
 
 }

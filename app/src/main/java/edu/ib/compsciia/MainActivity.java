@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
         }
         if (id == R.id.action_lifeForms) {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main); // replace "nav_host_fragment" with the id of your navHostFragment in activity layout
-            navController.navigate(R.id.lifeFormFragment);
+            navController.navigate(R.id.lifeFormListContainer);
             return true;
         }
         if (id == R.id.action_schedules) {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main); // replace "nav_host_fragment" with the id of your navHostFragment in activity layout
-            navController.navigate(R.id.scheduleFragment);
+            navController.navigate(R.id.scheduleListContainer);
             return true;
         }
         return super.onOptionsItemSelected(item);

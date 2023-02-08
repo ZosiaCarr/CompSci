@@ -21,7 +21,7 @@ import edu.ib.compsciia.businesslogic.Activity;
 import edu.ib.compsciia.businesslogic.AppViewModel;
 import edu.ib.compsciia.businesslogic.LifeFormManager;
 import edu.ib.compsciia.businesslogic.Schedule;
-import edu.ib.compsciia.businesslogic.daysOfWeek;
+import java.util.Calendar;
 
 public class AddScheduleFragment extends Fragment {
     private Schedule editItem;
@@ -46,20 +46,20 @@ public class AddScheduleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_schedule, container, false);
 
         Button btnSaveSchedule = (Button) view.findViewById(R.id.btnSaveSchedule);
-        ImageButton btnAddActivity = (ImageButton) view.findViewById(R.id.btnAddActivity);
+        Button btnAddActivity = (Button) view.findViewById(R.id.btnAddActivity);
         //Gets the fields from the form
         //Get Radio Buttons
         cbMonday = (CheckBox) view.findViewById(R.id.cbMonday);
         cbTuesday = (CheckBox) view.findViewById(R.id.cbTuesday);
-         cbWednesday = (CheckBox) view.findViewById(R.id.cbWednesday);
-         cbThursday = (CheckBox) view.findViewById(R.id.cbThursday);
-         cbFriday = (CheckBox) view.findViewById(R.id.cbFriday);
-         cbSaturday = (CheckBox) view.findViewById(R.id.cbSaturday);
-         cbSunday = (CheckBox) view.findViewById(R.id.cbSunday);
-         txtTime = (EditText)view.findViewById(R.id.txtScheduleTime);
-         txtDescription = (EditText)view.findViewById(R.id.txtShortDescription);
-         lblActivity = (TextView)view.findViewById(R.id.lblAtivitiesText);
-         lblDays = (TextView) view.findViewById(R.id.lblDays);
+        cbWednesday = (CheckBox) view.findViewById(R.id.cbWednesday);
+        cbThursday = (CheckBox) view.findViewById(R.id.cbThursday);
+        cbFriday = (CheckBox) view.findViewById(R.id.cbFriday);
+        cbSaturday = (CheckBox) view.findViewById(R.id.cbSaturday);
+        cbSunday = (CheckBox) view.findViewById(R.id.cbSunday);
+        txtTime = (EditText)view.findViewById(R.id.txtScheduleTime);
+        txtDescription = (EditText)view.findViewById(R.id.txtShortDescription);
+        lblActivity = (TextView)view.findViewById(R.id.lblAtivitiesText);
+        lblDays = (TextView) view.findViewById(R.id.lblDays);
 
         viewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
         LiveData<Schedule> cachedEditItem = viewModel.getSelectedSchedule();
@@ -123,6 +123,11 @@ public class AddScheduleFragment extends Fragment {
             txtTime.setError("Required");
             hasError = true;
         }
+        if(!timeValue.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"))
+        {
+            txtTime.setError("The time must be in the format HH:MM");
+            hasError = true;
+        }
         //Gives an error if the user does not add any activities
         if (editItem.getActivities().size() == 0) {
             lblActivity.setError("You need at least one activity");
@@ -142,21 +147,21 @@ public class AddScheduleFragment extends Fragment {
 
             editItem.setShortDescription(DescriptionValue);
             editItem.setTime(timeValue);
-            toggleDay(daysOfWeek.Monday,cbMonday.isChecked());
-            toggleDay(daysOfWeek.Tuesday,cbTuesday.isChecked());
-            toggleDay(daysOfWeek.Wednesday,cbWednesday.isChecked());
-            toggleDay(daysOfWeek.Thursday,cbThursday.isChecked());
-            toggleDay(daysOfWeek.Friday,cbFriday.isChecked());
-            toggleDay(daysOfWeek.Saturday,cbSaturday.isChecked());
-            toggleDay(daysOfWeek.Sunday,cbSunday.isChecked());
+            toggleDay(Calendar.MONDAY,cbMonday.isChecked());
+            toggleDay(Calendar.TUESDAY,cbTuesday.isChecked());
+            toggleDay(Calendar.WEDNESDAY,cbWednesday.isChecked());
+            toggleDay(Calendar.THURSDAY,cbThursday.isChecked());
+            toggleDay(Calendar.FRIDAY,cbFriday.isChecked());
+            toggleDay(Calendar.SATURDAY,cbSaturday.isChecked());
+            toggleDay(Calendar.SUNDAY,cbSunday.isChecked());
             //Saves the description of the life form
             LifeFormManager.getManager().addSchedule(editItem);
             LifeFormManager.getManager().persist();
             viewModel.setSelectedSchedule(null);
-            Navigation.findNavController(view).navigate(R.id.calendarFragment);
+            Navigation.findNavController(view).navigate(R.id.scheduleListContainer);
         }
     }
-    private void toggleDay(daysOfWeek d, boolean on)
+    private void toggleDay(int d, boolean on)
     {
         if(on)
         {
@@ -172,13 +177,14 @@ public class AddScheduleFragment extends Fragment {
         txtDescription.setText(editItem.getShortDescription());
 
         txtTime.setText(editItem.getTime());
-        cbMonday.setChecked(editItem.hasDayOfWeek(daysOfWeek.Monday));
-        cbTuesday.setChecked(editItem.hasDayOfWeek(daysOfWeek.Tuesday));
-        cbWednesday.setChecked(editItem.hasDayOfWeek(daysOfWeek.Wednesday));        cbMonday.setChecked(editItem.hasDayOfWeek(daysOfWeek.Monday));
-        cbThursday.setChecked(editItem.hasDayOfWeek(daysOfWeek.Thursday));
-        cbFriday.setChecked(editItem.hasDayOfWeek(daysOfWeek.Friday));
-        cbSaturday.setChecked(editItem.hasDayOfWeek(daysOfWeek.Saturday));
-        cbSunday.setChecked(editItem.hasDayOfWeek(daysOfWeek.Sunday));
+        cbMonday.setChecked(editItem.hasDayOfWeek(Calendar.MONDAY));
+        cbTuesday.setChecked(editItem.hasDayOfWeek(Calendar.TUESDAY));
+        cbWednesday.setChecked(editItem.hasDayOfWeek(Calendar.WEDNESDAY));
+
+        cbThursday.setChecked(editItem.hasDayOfWeek(Calendar.THURSDAY));
+        cbFriday.setChecked(editItem.hasDayOfWeek(Calendar.FRIDAY));
+        cbSaturday.setChecked(editItem.hasDayOfWeek(Calendar.SATURDAY));
+        cbSunday.setChecked(editItem.hasDayOfWeek(Calendar.SUNDAY));
 
     }
 

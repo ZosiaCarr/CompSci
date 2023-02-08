@@ -30,11 +30,6 @@
             android:id="@+id/action_addScheduleFragment_to_addActivityFragment"
             app:destination="@id/addActivityFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/lifeFormFragment"
-        android:name="edu.ib.compsciia.LifeFormFragment"
-        android:label="Life Forms"
-        tools:layout="@layout/life_form_item_list" />
 
     <fragment
         android:id="@+id/activityListFragment"
@@ -55,8 +50,13 @@
             app:destination="@id/addScheduleFragment" />
     </fragment>
     <fragment
-        android:id="@+id/scheduleFragment"
-        android:name="edu.ib.compsciia.ScheduleFragment"
+        android:id="@+id/scheduleListContainer"
+        android:name="edu.ib.compsciia.ScheduleListContainer"
         android:label="Schedules"
-        tools:layout="@layout/schedule_item_list" />
+        tools:layout="@layout/fragment_schedule_list_container" />
+    <fragment
+        android:id="@+id/lifeFormListContainer"
+        android:name="edu.ib.compsciia.LifeFormListContainer"
+        android:label="Life Forms"
+        tools:layout="@layout/fragment_life_form_list_container" />
 </navigation>

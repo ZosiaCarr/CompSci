@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 
 public class LifeFormManager  implements java.io.Serializable {
@@ -47,6 +48,32 @@ public class LifeFormManager  implements java.io.Serializable {
     public void removeLifeForm(LifeForm lf)
     {
         this.lifeForms.remove(lf);
+        Stack<Schedule> removeSchedule = new Stack<Schedule>();
+        for(Schedule s : schedules)
+        {
+            Stack<Activity> removeActivity = new Stack<Activity>();
+            for(Activity a: s.getActivities())
+            {
+                a.removeLifeForm(lf);
+                if(a.getLifeForms().size() ==0)
+                {
+                    removeActivity.push(a);
+                }
+            }
+            while(!removeActivity.isEmpty())
+            {
+                Activity a= removeActivity.pop();
+                s.removeActivity(a);
+            }
+            if(s.getActivities().size() == 0) {
+                removeSchedule.push(s);
+            }
+        }
+        while(!removeSchedule.isEmpty())
+        {
+            Schedule s = removeSchedule.pop();
+            this.removeSchedule(s);
+        }
     }
     public void addSchedule(Schedule s)
     {

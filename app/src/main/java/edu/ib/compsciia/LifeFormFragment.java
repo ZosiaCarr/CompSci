@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -53,6 +54,11 @@ public class LifeFormFragment extends Fragment {
     {
         LifeFormManager.getManager().removeLifeForm(lf);
         LifeFormManager.getManager().persist();
+        Fragment currentFragment = getFragmentManager().findFragmentByTag("YourFragmentTag");
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.detach(currentFragment);
+        fragmentTransaction.attach(currentFragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -62,11 +68,16 @@ public class LifeFormFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new MyLifeFormRecyclerViewAdapter(LifeFormManager.getManager().getLifeForms(),this));
+            bindListData(view);
         }
         return view;
+    }
+    private void bindListData(View view)
+    {
+        Context context = view.getContext();
+        RecyclerView recyclerView = (RecyclerView) view;
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new MyLifeFormRecyclerViewAdapter(LifeFormManager.getManager().getLifeForms(),this));
+
     }
 }

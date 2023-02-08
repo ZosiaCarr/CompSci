@@ -24,7 +24,8 @@
         android:ems="10"
         android:gravity="start|top"
         android:hint="Description"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btnSaveActivity"

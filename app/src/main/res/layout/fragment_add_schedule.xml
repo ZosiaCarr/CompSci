@@ -147,15 +147,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cbSunday" />
 
-        <ImageButton
+
+        <Button
             android:id="@+id/btnAddActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:src="@android:drawable/ic_input_add"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Add Activity"
             app:layout_constraintStart_toEndOf="@+id/lblAtivitiesText"
             app:layout_constraintTop_toBottomOf="@+id/txtShortDescription" />
+
 
         <EditText
             android:id="@+id/txtShortDescription"

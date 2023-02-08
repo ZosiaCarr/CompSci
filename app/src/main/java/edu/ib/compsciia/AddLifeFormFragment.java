@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class AddLifeFormFragment extends Fragment {
     Button btnLifeForm = null;
     RadioButton rbPet = null;
     RadioButton rbPlant = null;
-    TextView txtBirthDay = null;
+    EditText txtBirthDay = null;
 
     AppCompatEditText nameField = null;
     AppCompatEditText speciesField = null;
@@ -51,7 +52,7 @@ public class AddLifeFormFragment extends Fragment {
         btnLifeForm = (Button) view.findViewById(R.id.btnSaveLifeForm);
         rbPet = (RadioButton) view.findViewById(R.id.radioBtnPet);
         rbPlant = (RadioButton) view.findViewById(R.id.radioBtnPlant);
-        txtBirthDay = view.findViewById(R.id.txtBirthDate);
+        txtBirthDay = (EditText)view.findViewById(R.id.txtBirthDate);
         nameField = view.findViewById(R.id.txtLFName);
         speciesField = view.findViewById(R.id.txtSpecies);
         descriptionField = view.findViewById(R.id.txtDescription);
@@ -131,6 +132,20 @@ public class AddLifeFormFragment extends Fragment {
             descriptionField.setError("Required");
             hasError = true;
         }
+        if(txtBirthDay.getVisibility() == View.VISIBLE)
+        {
+            if(txtBirthDay.getText().length() == 0)
+            {
+                txtBirthDay.setError("Required");
+                hasError = true;
+            }
+            if(!txtBirthDay.getText().toString().matches( "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{2}$"))
+            {
+                txtBirthDay.setError("The date must be in the format MM/DD/YY");
+                hasError = true;
+            }
+
+        }
 
         //Saves life form
         if(!hasError)
@@ -178,7 +193,7 @@ public class AddLifeFormFragment extends Fragment {
             editItem.setSpecies(speciesValue);
             //Adds the life form to the life form manager
             LifeFormManager.getManager().persist();
-            Navigation.findNavController(view).navigate(R.id.lifeFormFragment);
+            Navigation.findNavController(view).navigate(R.id.lifeFormListContainer);
         }
     }
     public void SetValuesFromEditForm() {
@@ -200,8 +215,8 @@ public class AddLifeFormFragment extends Fragment {
             {
 
             }
-
-            txtBirthDay.setText( DateFormat.getDateInstance(DateFormat.SHORT).format(editItem.getBirthDay()));
+            if(editItem.getBirthDay() != null)
+                txtBirthDay.setText( DateFormat.getDateInstance(DateFormat.SHORT).format(editItem.getBirthDay()));
         }
         else
         {
