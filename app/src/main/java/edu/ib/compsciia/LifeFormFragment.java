@@ -27,6 +27,7 @@ import edu.ib.compsciia.businesslogic.LifeFormManager;
 public class LifeFormFragment extends Fragment {
 
     private AppViewModel viewModel;
+    private RecyclerView listContainerView;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -54,11 +55,7 @@ public class LifeFormFragment extends Fragment {
     {
         LifeFormManager.getManager().removeLifeForm(lf);
         LifeFormManager.getManager().persist();
-        Fragment currentFragment = getFragmentManager().findFragmentByTag("YourFragmentTag");
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.detach(currentFragment);
-        fragmentTransaction.attach(currentFragment);
-        fragmentTransaction.commit();
+        bindListData(listContainerView);
     }
 
     @Override
@@ -68,6 +65,7 @@ public class LifeFormFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
+            listContainerView = (RecyclerView) view;
             bindListData(view);
         }
         return view;

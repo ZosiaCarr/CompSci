@@ -59,4 +59,9 @@
         android:name="edu.ib.compsciia.LifeFormListContainer"
         android:label="Life Forms"
         tools:layout="@layout/fragment_life_form_list_container" />
+    <fragment
+        android:id="@+id/calendarListFragment"
+        android:name="edu.ib.compsciia.CalendarListFragment"
+        android:label="Calendar List"
+        tools:layout="@layout/fragment_calendar_list_list" />
 </navigation>

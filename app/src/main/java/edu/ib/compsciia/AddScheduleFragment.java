@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -162,6 +161,7 @@ public class AddScheduleFragment extends Fragment {
         }
     }
     private void toggleDay(int d, boolean on)
+
     {
         if(on)
         {

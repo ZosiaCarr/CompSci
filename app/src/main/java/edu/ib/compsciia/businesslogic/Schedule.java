@@ -1,6 +1,7 @@
 package edu.ib.compsciia.businesslogic;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -23,8 +24,9 @@ public class Schedule implements Serializable {
     public boolean hasDayOfWeek (int d) {
           return daysOfTheWeek.contains(d);
     }
-    public void removeDayOfTheWeek (int d) {
-         daysOfTheWeek.remove(d);
+    public void removeDayOfTheWeek (int i) {
+        Integer intObj = new Integer(i);
+         daysOfTheWeek.remove(intObj);
     }
     public boolean addDayOfWeek (int d) {
         return daysOfTheWeek.add(d);
@@ -67,11 +69,12 @@ public class Schedule implements Serializable {
 
         startDate.set(Calendar.HOUR_OF_DAY,Integer.parseInt(runTime[0]));
         startDate.set(Calendar.MINUTE,Integer.parseInt(runTime[1]));
-        while (startDate.compareTo(endDate) != 0)
+        int test = startDate.compareTo(endDate);
+        while (startDate.compareTo(endDate) < 0)
         {
             if(daysOfTheWeek.contains(startDate.get(Calendar.DAY_OF_WEEK)))
             {
-                returnData.add(startDate);
+                returnData.add((Calendar) startDate.clone());
             }
             startDate.add(Calendar.DATE,1);
         }
@@ -92,6 +95,19 @@ public class Schedule implements Serializable {
             }
         }
     }
+
+    public String toString() {
+            String res = this.shortDescription;
+            String sep = " ";
+            for(Activity a : this.activities)
+            {
+                for(LifeForm l : a.getLifeForms()) {
+                    res += sep + l.getName();
+                    sep = ", ";
+                }
+            }
+            return res;
+        }
 
 }
 

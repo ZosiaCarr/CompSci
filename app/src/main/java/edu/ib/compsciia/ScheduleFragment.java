@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,13 +34,7 @@ public class ScheduleFragment extends Fragment {
     public ScheduleFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static ScheduleFragment newInstance(int columnCount) {
-        ScheduleFragment fragment = new ScheduleFragment();
-        return fragment;
-    }
-
+    private RecyclerView listView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +48,17 @@ public class ScheduleFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-            bindList(view);
+            listView = (RecyclerView) view;
+            bindList();
         }
 
         return view;
     }
 
-    private void bindList(View view)
+    private void bindList()
     {
-        Context context = view.getContext();
-        RecyclerView recyclerView = (RecyclerView) view;
+        Context context = listView.getContext();
+        RecyclerView recyclerView = (RecyclerView) listView;
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         recyclerView.setAdapter(new MyScheduleRecyclerViewAdapter(LifeFormManager.getManager().getSchedules(), this));
@@ -80,7 +74,7 @@ public class ScheduleFragment extends Fragment {
     {
         LifeFormManager.getManager().removeSchedule(s);
         LifeFormManager.getManager().persist();
-        bindList(v);
+        bindList();
     }
 
 }

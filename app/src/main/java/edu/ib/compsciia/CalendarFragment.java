@@ -43,7 +43,7 @@ public class CalendarFragment extends Fragment {
         Navigation.findNavController(view).navigate(R.id.AddLifeFormFragment);
     }
     public void onAddScheduleClick(View view) {
-        Navigation.findNavController(view).navigate(R.id.addScheduleFragment);
+        Navigation.findNavController(view).navigate(R.id.calendarListFragment);
     }
     @Override
     public void onDestroyView() {

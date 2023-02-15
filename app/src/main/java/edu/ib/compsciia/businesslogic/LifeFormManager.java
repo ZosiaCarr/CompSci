@@ -2,12 +2,18 @@ package edu.ib.compsciia.businesslogic;
 
 import android.content.Context;
 
+import androidx.recyclerview.widget.SortedList;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Stack;
 
@@ -82,6 +88,20 @@ public class LifeFormManager  implements java.io.Serializable {
             this.schedules.add(s);
         }
 
+    }
+    public List<ScheduleRunDate> getScheduleRunDates(Calendar start, Calendar end)
+    {
+        List<ScheduleRunDate> ret = new ArrayList<ScheduleRunDate>();
+        for(Schedule schedule : schedules)
+        {
+            List<Calendar> dates = schedule.getRunsBetweenDates(start,end);
+            for(Calendar d : dates)
+            {
+                ret.add(new ScheduleRunDate(schedule,d));
+            }
+        }
+        Collections.sort(ret);
+        return ret;
     }
     public void removeSchedule(Schedule s)
     {
