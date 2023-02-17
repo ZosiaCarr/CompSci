@@ -123,24 +123,29 @@ public class LifeFormManager  implements java.io.Serializable {
             e.printStackTrace();
         }
     }
+    //Loads data from storage, or crates new instance if not found
     public static LifeFormManager load(Context context)
     {
         try {
+            //get the file from local storage of device
             FileInputStream fis = context.openFileInput(FILENAME);
             ObjectInputStream is = new ObjectInputStream(fis);
             Object readObject = is.readObject();
             is.close();
 
+            //if file is found, and object read, load to our object
             if(readObject != null && readObject instanceof LifeFormManager) {
                 lifeFormManagerInstance =  (LifeFormManager) readObject;
             }
         } catch (IOException e) {
+            //file didn't read correctly (corrupt, missing) create new instance of the data
             e.printStackTrace();
             lifeFormManagerInstance = new LifeFormManager();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             lifeFormManagerInstance = new LifeFormManager();
         }
+        //context is needed for saving the file later
         lifeFormManagerInstance.setContext(context);
         return lifeFormManagerInstance;
     }

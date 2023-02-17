@@ -15,8 +15,6 @@ import androidx.navigation.Navigation;
 public class CalendarFragment extends Fragment {
 
 
-    private ActivityViewModel mViewModel;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {

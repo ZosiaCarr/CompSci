@@ -75,7 +75,6 @@ public class AddScheduleFragment extends Fragment {
             viewModel.setSelectedSchedule(editItem);
         }
 
-
         btnSaveSchedule.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onSave(view);
