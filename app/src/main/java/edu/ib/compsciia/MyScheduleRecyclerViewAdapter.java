@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import edu.ib.compsciia.businesslogic.Schedule;
-import edu.ib.compsciia.placeholder.PlaceholderContent.PlaceholderItem;
 import edu.ib.compsciia.databinding.ScheduleItemBinding;
 
 import java.util.List;

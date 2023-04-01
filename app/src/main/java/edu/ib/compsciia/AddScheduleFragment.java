@@ -36,6 +36,7 @@ public class AddScheduleFragment extends Fragment {
     CheckBox cbSunday = null;
     EditText txtTime = null;
     EditText txtDescription = null;
+    EditText txtLeadNotification = null;
     TextView lblActivity = null;
     TextView lblDays = null;
 
@@ -56,6 +57,7 @@ public class AddScheduleFragment extends Fragment {
         cbSaturday = (CheckBox) view.findViewById(R.id.cbSaturday);
         cbSunday = (CheckBox) view.findViewById(R.id.cbSunday);
         txtTime = (EditText)view.findViewById(R.id.txtScheduleTime);
+        txtLeadNotification = (EditText)view.findViewById(R.id.txtLeadNotification);
         txtDescription = (EditText)view.findViewById(R.id.txtShortDescription);
         lblActivity = (TextView)view.findViewById(R.id.lblAtivitiesText);
         lblDays = (TextView) view.findViewById(R.id.lblDays);
@@ -107,6 +109,7 @@ public class AddScheduleFragment extends Fragment {
         //Gets the needed values
         String DescriptionValue = txtDescription.getText().toString();
         String timeValue = txtTime.getText().toString();
+        String leadTimeValue = txtLeadNotification.getText().toString();
 
         //Valadates all feilds have been filled in
         //Gives an error if the user does not input a description of the schedule
@@ -126,6 +129,16 @@ public class AddScheduleFragment extends Fragment {
             txtTime.setError("The time must be in the format HH:MM");
             hasError = true;
         }
+        if (leadTimeValue.length() == 0) {
+            txtLeadNotification.setError("Required");
+            hasError = true;
+        }
+        if(!leadTimeValue.matches("^\\d+$"))
+        {
+            txtLeadNotification.setError("The time must be an integer");
+            hasError = true;
+        }
+
         //Gives an error if the user does not add any activities
         if (editItem.getActivities().size() == 0) {
             lblActivity.setError("You need at least one activity");
@@ -145,6 +158,7 @@ public class AddScheduleFragment extends Fragment {
 
             editItem.setShortDescription(DescriptionValue);
             editItem.setTime(timeValue);
+            editItem.setAlertTimeBefore(Integer.parseInt(leadTimeValue));
             toggleDay(Calendar.MONDAY,cbMonday.isChecked());
             toggleDay(Calendar.TUESDAY,cbTuesday.isChecked());
             toggleDay(Calendar.WEDNESDAY,cbWednesday.isChecked());
@@ -176,6 +190,7 @@ public class AddScheduleFragment extends Fragment {
         txtDescription.setText(editItem.getShortDescription());
 
         txtTime.setText(editItem.getTime());
+        txtLeadNotification.setText(String.valueOf(editItem.getAlertTimeBefore()));
         cbMonday.setChecked(editItem.hasDayOfWeek(Calendar.MONDAY));
         cbTuesday.setChecked(editItem.hasDayOfWeek(Calendar.TUESDAY));
         cbWednesday.setChecked(editItem.hasDayOfWeek(Calendar.WEDNESDAY));

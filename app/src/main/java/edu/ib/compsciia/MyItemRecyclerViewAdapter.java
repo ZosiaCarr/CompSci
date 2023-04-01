@@ -5,24 +5,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import edu.ib.compsciia.businesslogic.Schedule;
 import edu.ib.compsciia.businesslogic.ScheduleRunDate;
-import edu.ib.compsciia.placeholder.PlaceholderContent.PlaceholderItem;
 import edu.ib.compsciia.databinding.FragmentCalendarListBinding;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Dictionary;
 import java.util.List;
 
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<ScheduleRunDate> mValues;
+    private final CalendarListFragment fragment;
 
-    public MyItemRecyclerViewAdapter(List<ScheduleRunDate> items) {
+    public MyItemRecyclerViewAdapter(List<ScheduleRunDate> items, CalendarListFragment f) {
         mValues = items;
+        fragment = f;
     }
 
     @Override
@@ -49,11 +48,19 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final TextView mIdView;
         public final TextView mContentView;
         public ScheduleRunDate mItem;
+        public final ImageView mView;
 
         public ViewHolder(FragmentCalendarListBinding binding) {
             super(binding.getRoot());
             mIdView = binding.itemNumber;
             mContentView = binding.content;
+            mView = binding.view;
+
+            mView.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    fragment.onView(v, mItem.getSchedule());
+                }
+            });
         }
 
         @Override

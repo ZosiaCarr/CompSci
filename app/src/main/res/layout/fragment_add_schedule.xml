@@ -74,7 +74,7 @@
             android:layout_marginEnd="24dp"
             android:text="Save"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtScheduleTime" />
+            app:layout_constraintTop_toBottomOf="@+id/txtLeadNotification" />
 
         <TextView
             android:id="@+id/lblDays"
@@ -146,7 +146,18 @@
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cbSunday" />
-
+        <EditText
+            android:id="@+id/txtLeadNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:hint="Minutes before to notify"
+            android:inputType="number"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtScheduleTime" />
 
         <Button
             android:id="@+id/btnAddActivity"

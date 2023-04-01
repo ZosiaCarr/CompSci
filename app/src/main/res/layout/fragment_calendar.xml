@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalendarFragment">
+    tools:context=".CalendarFragmentPrint">
 
     <TextView
         android:id="@+id/textview_second"
@@ -43,34 +49,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="20dp"
         android:text="Schedule"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAddLifeForm" />
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/txtAdditionalDirections"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Additional instructions"
         android:inputType="textMultiLine"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView2" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnPrint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="Print Schedule"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAdditionalDirections"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView2"
+        android:name="edu.ib.compsciia.CalendarListFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="164dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+    />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

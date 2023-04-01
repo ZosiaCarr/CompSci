@@ -15,5 +15,7 @@
     <string name="life_forms">Life Forms</string>
     <string name="Activity">fragment_activity</string>
     <string name="description">Description</string>
+    <string name="channel_name">Pet Manager</string>
+    <string name="channel_description">Manage your pet\'s schedule</string>
 
 </resources>

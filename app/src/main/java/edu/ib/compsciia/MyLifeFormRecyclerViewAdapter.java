@@ -1,27 +1,19 @@
 package edu.ib.compsciia;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import edu.ib.compsciia.businesslogic.LifeForm;
 import edu.ib.compsciia.databinding.LifeFormItemBinding;
-import edu.ib.compsciia.placeholder.PlaceholderContent.PlaceholderItem;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyLifeFormRecyclerViewAdapter extends RecyclerView.Adapter<MyLifeFormRecyclerViewAdapter.ViewHolder> {
 
     private final List<LifeForm> mValues;

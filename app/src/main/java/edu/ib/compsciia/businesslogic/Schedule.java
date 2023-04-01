@@ -5,17 +5,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
+
+import edu.ib.compsciia.R;
 
 public class Schedule implements Serializable {
     public Schedule() {
         activities = new ArrayList<Activity>();
         daysOfTheWeek = new ArrayList<Integer>();
+        Random rand = new Random();
+        id = rand.nextInt(10000);
     }
 
     private final List<Activity> activities;
     private String shortDescription;
     private final List<Integer> daysOfTheWeek;
     private int alertTimeBefore;
+    private int id;
     private String time;
 
     public List<Activity> getActivities () {
@@ -38,6 +44,9 @@ public class Schedule implements Serializable {
     }
     public void setTime(String time) {
         this.time = time;
+    }
+    public int getUniqueId() {
+        return id;
     }
     public int getAlertTimeBefore() {
         return alertTimeBefore;
@@ -80,19 +89,22 @@ public class Schedule implements Serializable {
         }
         return returnData;
     }
-    public Calendar getNextRunDate()
+    public ScheduleRunDate getNextRunDate()
     {
         Calendar date = Calendar.getInstance();
         String[] runTime = time.split(":");
-
+        Calendar today= Calendar.getInstance();
         date.set(Calendar.HOUR_OF_DAY,Integer.parseInt(runTime[0]));
         date.set(Calendar.MINUTE,Integer.parseInt(runTime[1]));
         while (true)
         {
-            if(daysOfTheWeek.contains(date.get(Calendar.DAY_OF_WEEK)))
+            if(daysOfTheWeek.contains(date.get(Calendar.DAY_OF_WEEK)) && today.compareTo(date) <0)
             {
-                return date;
+                SimpleDateFormat f = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                String d = f.format(date.getTime());
+                return new ScheduleRunDate(this,date);
             }
+            date.add(Calendar.DATE,1);
         }
     }
 

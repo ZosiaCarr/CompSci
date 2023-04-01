@@ -19,6 +19,7 @@ import java.util.Stack;
 
 
 public class LifeFormManager  implements java.io.Serializable {
+
     private static LifeFormManager lifeFormManagerInstance = null;
     public static LifeFormManager getManager()
     {
@@ -32,6 +33,17 @@ public class LifeFormManager  implements java.io.Serializable {
     private static final String FILENAME = "LifeForms.data";
     private List<LifeForm> lifeForms;
     private List<Schedule> schedules;
+
+    public String getAdditionalInstructions() {
+        return additionalInstructions;
+    }
+
+    public void setAdditionalInstructions(String additionalInstructions) {
+        this.additionalInstructions = additionalInstructions;
+        this.persist();
+    }
+
+    private String additionalInstructions;
     private static Context _context;
     private static void setContext(Context c) {_context = c;}
     public List<LifeForm> getLifeForms () {
@@ -40,6 +52,8 @@ public class LifeFormManager  implements java.io.Serializable {
     public List<Schedule> getSchedules () {
         return schedules;
     }
+
+    transient List<ScheduleEventHandler> listeners;
 
 
     public void addLifeForm(LifeForm lf)
@@ -86,8 +100,30 @@ public class LifeFormManager  implements java.io.Serializable {
         if(!this.schedules.contains(s))
         {
             this.schedules.add(s);
+            for(ScheduleEventHandler h :listeners)
+            {
+                h.ScheduleNextEvent(s.getNextRunDate());
+            }
         }
-
+    }
+    public void ScheduleNotificationAgain(int id)
+    {
+        Schedule thisOne = null;
+        for(Schedule s : schedules)
+        {
+           if(s.getUniqueId() == id)
+           {
+               thisOne = s;
+               break;
+           }
+        }
+        if(thisOne != null)
+        {
+            for(ScheduleEventHandler h :listeners)
+            {
+                h.ScheduleNextEvent(thisOne.getNextRunDate());
+            }
+        }
     }
     public List<ScheduleRunDate> getScheduleRunDates(Calendar start, Calendar end)
     {
@@ -103,9 +139,31 @@ public class LifeFormManager  implements java.io.Serializable {
         Collections.sort(ret);
         return ret;
     }
+    public List<ScheduleRunDate> getNextScheduleRunDate()
+    {
+        List<ScheduleRunDate> ret = new ArrayList<ScheduleRunDate>();
+        for(Schedule schedule : schedules)
+        {
+            ScheduleRunDate date = schedule.getNextRunDate();
+            ret.add(date);
+        }
+        return ret;
+    }
+    public void addListener(ScheduleEventHandler toAdd) {
+        if(listeners == null)
+        {
+            listeners = new ArrayList<ScheduleEventHandler>();
+        }
+        listeners.add(toAdd);
+    }
+
     public void removeSchedule(Schedule s)
     {
         this.schedules.remove(s);
+        for(ScheduleEventHandler h : listeners)
+        {
+            h.ScheduleRemoved(s.getUniqueId());
+        }
     }
     public void save(Context context)
     {

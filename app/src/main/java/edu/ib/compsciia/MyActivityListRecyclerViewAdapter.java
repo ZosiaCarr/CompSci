@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import edu.ib.compsciia.businesslogic.Activity;
-import edu.ib.compsciia.placeholder.PlaceholderContent.PlaceholderItem;
 import edu.ib.compsciia.databinding.ActivityListItemBinding;
 
 import java.util.List;
