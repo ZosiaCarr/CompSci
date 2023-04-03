@@ -144,8 +144,7 @@ public class AddActivityFragment extends Fragment {
             }
 
             Schedule mySchedule = viewModel.getSelectedSchedule().getValue();
-            if(!mySchedule.getActivities().contains(editItem))
-            {
+            if (mySchedule != null && !mySchedule.getActivities().contains(editItem)) {
                 mySchedule.addActivity(editItem);
             }
             viewModel.setSelectedActivity(null);

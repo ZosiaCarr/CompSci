@@ -80,10 +80,8 @@ public class MainActivity extends AppCompatActivity implements ScheduleEventHand
 
         notifyIntent.putExtra("notification",buildNotification(run.getSchedule()));
         notifyIntent.putExtra("notification_id",run.getSchedule().getUniqueId());
-        Calendar today = Calendar.getInstance();
         Calendar scheduleRunDate = run.getDate();
         scheduleRunDate.add(Calendar.MINUTE,run.getSchedule().getAlertTimeBefore() * -1);
-        long startTime = Math.abs(run.getDate().getTimeInMillis() - today.getTimeInMillis());
         PendingIntent pendingIntent = PendingIntent.getBroadcast
                 (this.getBaseContext(), run.getSchedule().getUniqueId(), notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) this.getBaseContext().getSystemService(Context.ALARM_SERVICE);

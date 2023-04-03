@@ -1,5 +1,8 @@
 package edu.ib.compsciia;
 
+import android.graphics.Color;
+import android.graphics.drawable.Icon;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,10 @@ public class MyLifeFormRecyclerViewAdapter extends RecyclerView.Adapter<MyLifeFo
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(mValues.get(position).getName());
+        holder.mContentView.setTextColor(mValues.get(position).getColor());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            holder.lfIcon.setImageResource(mValues.get(position).getIcon());
+        }
     }
 
     @Override
@@ -45,6 +52,7 @@ public class MyLifeFormRecyclerViewAdapter extends RecyclerView.Adapter<MyLifeFo
         final public TextView mContentView;
         final public ImageView mDelete;
         final public ImageView mEdit;
+        final public ImageView lfIcon;
         public LifeForm mItem;
 
         public ViewHolder(LifeFormItemBinding binding) {
@@ -53,6 +61,7 @@ public class MyLifeFormRecyclerViewAdapter extends RecyclerView.Adapter<MyLifeFo
             mContentView = binding.content;
             mDelete = binding.delete;
             mEdit = binding.edit;
+            lfIcon = binding.lfIcon;
             mDelete.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     fragment.onDelete(v, mItem);

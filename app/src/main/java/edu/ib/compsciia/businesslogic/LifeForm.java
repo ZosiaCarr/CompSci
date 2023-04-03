@@ -1,13 +1,8 @@
 package edu.ib.compsciia.businesslogic;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public abstract class LifeForm  implements java.io.Serializable{
-    public LifeForm() {
-        activities = new ArrayList<Activity>();
-    }
 
     public String getName() {
         return name;
@@ -33,6 +28,12 @@ public abstract class LifeForm  implements java.io.Serializable{
         this.species = species;
     }
 
+    public abstract boolean hasBirthDay();
+
+    public abstract int getColor();
+
+    public abstract int getIcon();
+
     public Date getBirthDay() {
         return birthDay;
     }
@@ -47,19 +48,6 @@ public abstract class LifeForm  implements java.io.Serializable{
     private String description;
 
     private Date birthDay;
-
-    private List<Activity> activities;
-    public List<Activity> getActivities () {
-        return activities;
-    }
-    public void addActivity(Activity ac)
-    {
-        this.activities.add(ac);
-    }
-    public void removeActivity(Activity ac)
-    {
-        this.activities.remove(ac);
-    }
 
 
 }

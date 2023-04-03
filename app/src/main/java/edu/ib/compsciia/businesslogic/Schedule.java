@@ -71,10 +71,11 @@ public class Schedule implements Serializable {
     {
         this.activities.remove(ac);
     }
-    public List<Calendar> getRunsBetweenDates(Calendar startDate,Calendar endDate)
+    public List<Calendar> getRunsBetweenDates(Calendar start,Calendar endDate)
     {
         List<Calendar> returnData = new ArrayList<Calendar>();
         String[] runTime = time.split(":");
+        Calendar startDate = (Calendar) start.clone();
 
         startDate.set(Calendar.HOUR_OF_DAY,Integer.parseInt(runTime[0]));
         startDate.set(Calendar.MINUTE,Integer.parseInt(runTime[1]));

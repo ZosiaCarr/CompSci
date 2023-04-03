@@ -4,7 +4,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:maxWidth="100pt">
+    <ImageView
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@android:drawable/ic_menu_view"
+        tools:srcCompat="@android:drawable/ic_menu_view" />
 
     <TextView
         android:id="@+id/item_number"
@@ -20,13 +28,5 @@
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem" />
 
-    <ImageView
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="16dp"
-        app:srcCompat="@android:drawable/ic_menu_view"
-        tools:srcCompat="@android:drawable/ic_menu_view"/>
 
 </LinearLayout>

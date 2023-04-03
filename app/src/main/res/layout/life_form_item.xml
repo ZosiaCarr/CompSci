@@ -6,11 +6,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal">
 
+    <ImageView
+        android:id="@+id/lfIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="15dp"
+        android:minWidth="15dp"
+        android:layout_weight="1"
+
+  ></ImageView>
+
     <TextView
         android:id="@+id/item_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView

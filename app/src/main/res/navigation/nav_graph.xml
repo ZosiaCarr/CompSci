@@ -64,13 +64,4 @@
         android:name="edu.ib.compsciia.CalendarListFragment"
         android:label="Calendar List"
         tools:layout="@layout/fragment_calendar_list_list" />
-    <fragment
-        android:id="@+id/fragment_print"
-        android:name="edu.ib.compsciia.fragment_print"
-        android:label="fragment_print"
-        tools:layout="@layout/fragment_print" />
-    <fragment
-        android:id="@+id/calendarFragmentPrint"
-        android:name="edu.ib.compsciia.CalendarFragmentPrint"
-        android:label="CalendarFragmentPrint" />
 </navigation>
