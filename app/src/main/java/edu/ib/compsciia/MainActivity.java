@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements ScheduleEventHand
                 (this.getBaseContext(), run.getSchedule().getUniqueId(), notifyIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager) this.getBaseContext().getSystemService(Context.ALARM_SERVICE);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-        String date = simpleDateFormat.format(run.getDate().getTime());
         alarmManager.set(AlarmManager.RTC_WAKEUP, run.getDate().getTimeInMillis(), pendingIntent);
     }
     public void CancelNotification(int id)
