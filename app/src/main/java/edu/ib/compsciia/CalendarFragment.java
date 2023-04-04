@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.print.PrintHelper;
 
@@ -24,11 +25,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import edu.ib.compsciia.businesslogic.AppViewModel;
 import edu.ib.compsciia.businesslogic.LifeFormManager;
 import edu.ib.compsciia.businesslogic.ScheduleRunDate;
 
 
 public class CalendarFragment extends Fragment {
+    private AppViewModel viewModel;
     private EditText additionalInformation;
     private Button btnLifeForm;
     private Button btnSchedule;
@@ -37,6 +40,7 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_calendar, container, false);
+        viewModel = new ViewModelProvider(getActivity()).get(AppViewModel.class);
         btnLifeForm = (Button) view.findViewById(R.id.btnAddLifeForm);
         btnSchedule = (Button) view.findViewById(R.id.btnAddSchedule);
         btnPrint = (Button) view.findViewById(R.id.btnPrint);
@@ -85,6 +89,7 @@ public class CalendarFragment extends Fragment {
         Navigation.findNavController(view).navigate(R.id.AddLifeFormFragment);
     }
     public void onAddScheduleClick(View view) {
+        viewModel.setSelectedSchedule(null);
         Navigation.findNavController(view).navigate(R.id.addScheduleFragment);
     }
     @Override

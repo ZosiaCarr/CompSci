@@ -28,6 +28,7 @@ import edu.ib.compsciia.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -83,11 +84,11 @@ public class MainActivity extends AppCompatActivity implements ScheduleEventHand
         Calendar scheduleRunDate = run.getDate();
         scheduleRunDate.add(Calendar.MINUTE,run.getSchedule().getAlertTimeBefore() * -1);
         PendingIntent pendingIntent = PendingIntent.getBroadcast
-                (this.getBaseContext(), run.getSchedule().getUniqueId(), notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                (this.getBaseContext(), run.getSchedule().getUniqueId(), notifyIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager) this.getBaseContext().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP,
-                run.getDate().getTimeInMillis(), pendingIntent);
-
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        String date = simpleDateFormat.format(run.getDate().getTime());
+        alarmManager.set(AlarmManager.RTC_WAKEUP, run.getDate().getTimeInMillis(), pendingIntent);
     }
     public void CancelNotification(int id)
     {
@@ -123,11 +124,6 @@ public class MainActivity extends AppCompatActivity implements ScheduleEventHand
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_calendar) {
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main); // replace "nav_host_fragment" with the id of your navHostFragment in activity layout
-            navController.navigate(R.id.calendarFragment);
-            return true;
-        }
         if (id == R.id.action_calendar) {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main); // replace "nav_host_fragment" with the id of your navHostFragment in activity layout
             navController.navigate(R.id.calendarFragment);

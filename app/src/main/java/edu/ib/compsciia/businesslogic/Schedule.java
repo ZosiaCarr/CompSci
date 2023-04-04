@@ -31,11 +31,14 @@ public class Schedule implements Serializable {
           return daysOfTheWeek.contains(d);
     }
     public void removeDayOfTheWeek (int i) {
-        Integer intObj = new Integer(i);
-         daysOfTheWeek.remove(intObj);
+        if(daysOfTheWeek.contains(i)) {
+            daysOfTheWeek.remove(i);
+        }
     }
-    public boolean addDayOfWeek (int d) {
-        return daysOfTheWeek.add(d);
+    public void addDayOfWeek (int d) {
+        if(!daysOfTheWeek.contains(d)) {
+            daysOfTheWeek.add(d);
+        }
     }
 
 

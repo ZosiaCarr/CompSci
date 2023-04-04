@@ -169,6 +169,7 @@ public class AddScheduleFragment extends Fragment {
             //Saves the description of the life form
             LifeFormManager.getManager().addSchedule(editItem);
             LifeFormManager.getManager().persist();
+            LifeFormManager.getManager().ScheduleNotificationAgain(editItem.getUniqueId());
             viewModel.setSelectedSchedule(null);
             Navigation.findNavController(view).navigate(R.id.scheduleListContainer);
         }
